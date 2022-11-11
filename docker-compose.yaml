@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+
+  nginx:
+    image: joseaugustoalmeida/nginx:prod
+    container_name: nginx
+    networks:
+      - node-network
+   
+    ports:
+     - "8080:80"
+
+  app:
+    build:
+      context: node
+    # image: joseaugustoalmeida/node:prod
+    container_name: app
+    volumes: 
+      - ~/curso/FullCycle/docker/fullcycle-node/node:/usr/src/app
+    tty: true
+    networks:
+     - node-network
+
+    ports:
+     - "3000:3000"
+
+
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ~/curso/FullCycle/docker/fullcycle-node/mysql:/var/lib/mysql
+
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=123456789
+      - MYSQL_USER=joseaugusto
+    networks:
+      - node-network
+
+networks:
+  node-network:
+    driver: bridge
