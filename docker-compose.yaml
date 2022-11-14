@@ -23,7 +23,7 @@ services:
     networks:
       - node-network
 
-    # command: "npm install"
+    command: "npm install && node index.js"
 
     ports:
      - "3000:3000"
