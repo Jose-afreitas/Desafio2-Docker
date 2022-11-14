@@ -2,31 +2,42 @@ version: '3'
 
 services:
 
-
   nginx:
-    image: joseaugustoalmeida/nginx:prod
+    build:
+      context: nginx
+      dockerfile: Dockerfile.prod
     container_name: nginx
     networks:
       - node-network
-   
     ports:
      - "8080:80"
+
 
   app:
     build:
       context: node
-    # image: joseaugustoalmeida/node:prod
     container_name: app
     volumes: 
       - ~/curso/FullCycle/docker/fullcycle-node/node:/usr/src/app
     tty: true
     networks:
-     - node-network
+      - node-network
+
+    # command: "npm install"
 
     ports:
      - "3000:3000"
 
+    depends_on: 
+  
+      - db
+      
+   
 
+  
+
+
+    
   db:
     image: mysql:5.7
     command: --innodb-use-native-aio=0
@@ -42,6 +53,7 @@ services:
       - MYSQL_USER=joseaugusto
     networks:
       - node-network
+      
 
 networks:
   node-network:
