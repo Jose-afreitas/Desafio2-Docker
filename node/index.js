@@ -8,19 +8,15 @@ const config = {
     password: '123456789',
     database: 'nodedb'
 };
-//conectando com o banco de dados
 
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
-
-//Criando tabela no banco de dados
 
 connection.query(`CREATE TABLE IF NOT exists people(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 )`);
-
 
 app.get("/", (req, res) => {
 
@@ -31,7 +27,6 @@ app.get("/", (req, res) => {
         }
         res.send(result)
 
-        //mostrando no back-end
         console.log("mostrando os resultados", result)
     })
 })
@@ -40,4 +35,3 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log('running in the door ' + port)
 });
-
