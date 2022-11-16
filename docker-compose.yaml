@@ -20,7 +20,8 @@ services:
       context: node
     container_name: app
     volumes: 
-      - ~/curso/FullCycle/docker/fullcycle-node/node:/usr/src/app
+      - ./node:/usr/src/app
+      - /usr/src/app/node_modules
     tty: true
     networks:
       - node-network
@@ -38,7 +39,7 @@ services:
     restart: always
     tty: true
     volumes:
-      - ~/curso/FullCycle/docker/fullcycle-node/mysql:/var/lib/mysql
+      - ./mysql:/var/lob/mysql
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=123456789

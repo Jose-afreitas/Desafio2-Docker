@@ -15,8 +15,14 @@ const connection = mysql.createConnection(config)
 connection.query(`CREATE TABLE IF NOT exists people(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id), 
+    UNIQUE KEY (name)
 )`);
+
+const sql = `
+ INSERT IGNORE INTO people(name) VALUES ("Jose Augusto"),("Rodolfo souza"),("Paulo Henroque"), ("Emerson Oliveira"),
+ ('Lucian Tavares'), ("wesley willians")`
+connection.query(sql)
 
 app.get("/", (req, res) => {
 
@@ -30,6 +36,8 @@ app.get("/", (req, res) => {
         console.log("mostrando os resultados", result)
     })
 })
+
+
 
 
 app.listen(port, () => {
