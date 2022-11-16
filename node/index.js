@@ -20,8 +20,8 @@ connection.query(`CREATE TABLE IF NOT exists people(
 )`);
 
 const sql = `
- INSERT IGNORE INTO people(name) VALUES ("Jose Augusto"),("Rodolfo souza"),("Paulo Henroque"), ("Emerson Oliveira"),
- ('Lucian Tavares'), ("wesley willians")`
+ INSERT IGNORE INTO people(name) VALUES ("Jose Augusto"),("Rodolfo souza"),("Paulo Henrique"), ("Emerson Oliveira"),
+ ('Lucian Tavares'), ("wesley willians"), ("Henrique Frugoli"),("Vitor Dias")`
 connection.query(sql)
 
 app.get("/", (req, res) => {
